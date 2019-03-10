@@ -16,12 +16,26 @@
                 <div class="mb-6">
                     <h2 class="text-grey text-lg font-normal mb-3">Tasks</h3>
                     {{-- Tasks --}}
-                    <div class="card mb-3">Lorem Ipsum</div>
-                    <div class="card mb-3">Lorem Ipsum</div>
-                    <div class="card mb-3">Lorem Ipsum</div>
-                    <div class="card mb-3">Lorem Ipsum</div>
-                    <div class="card mb-3">Lorem Ipsum</div>
-                    <div class="card">Lorem Ipsum</div>
+                    @forelse ($project->tasks as $task)
+                        <form action="{{ $task->path() }}" method="post">
+                            @method('PATCH')
+                            @csrf
+                            <div class="card mb-3">
+                                <div class="flex">
+                                    <input type="text" name="body" value="{{ $task->body }}" class="w-full {{ $task->completed ? 'text-grey' : '' }}">
+                                    <input type="checkbox" name="completed" onChange="this.form.submit()" {{ $task->completed ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                        </form>
+                    @empty
+                        <div class="card mb-3">There are no tasks associated with this project. </div>
+                    @endforelse
+                        <div class="card mb-3">
+                            <form action="{{ $project->path() . '/tasks' }}" method="post">
+                                @csrf
+                                <input type="text" placeholder="Add a new task..." class="w-full" name="body">
+                            </form>
+                        </div>
                 </div>
                 <div>
                     <h2 class="text-grey text-lg font-normal mb-3">General Notes</h3>
