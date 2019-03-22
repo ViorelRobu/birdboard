@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Task;
+use App\Activity;
 
 class Project extends Model
 {
@@ -33,5 +34,24 @@ class Project extends Model
     public function addTask($body)
     {
         return $this->tasks()->create(compact('body'));
+    }
+
+    public function activity()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    /**
+     * Record activity for a project
+     *
+     * @param string $type
+     * @param \App\Project $project
+     */
+    public function recordActivity($type)
+    {
+        Activity::create([
+            'project_id' => $this->id,
+            'description' => $type
+        ]);
     }
 }
