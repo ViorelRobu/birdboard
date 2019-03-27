@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Activity;
+use App\RecordsActivity;
+
 
 class Task extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
 
     protected $touches = ['project'];
@@ -14,6 +18,8 @@ class Task extends Model
     protected $casts = [
         'completed' => 'boolean'
     ];
+
+    protected static $recordableEvents = ['created', 'deleted'];
 
     public function complete()
     {
@@ -40,26 +46,8 @@ class Task extends Model
     }
 
     /**
-     * Record activity for a project
-     *
-     * @param string $description
-     * @param \App\Project $project
-     */
-    public function recordActivity($description)
-    {
-        $this->activity()->create([
-            'project_id' => $this->project->id,
-            'description' => $description
-        ]);
-    }
-
-    /**
      * The activity feed for the project
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function activity()
-    {
-        return $this->morphMany(Activity::class, 'subject')->latest();
-    }
 }
