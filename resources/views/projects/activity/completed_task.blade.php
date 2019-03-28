@@ -1,1 +1,1 @@
-You completed the "{{ $activity->subject->body }}" task.
+{{ $activity->user->name }} completed the "{{ $activity->subject->body }}" task.

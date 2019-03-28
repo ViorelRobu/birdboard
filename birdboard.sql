@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: mart. 26, 2019 la 08:02 PM
+-- Timp de generare: mart. 28, 2019 la 08:25 PM
 -- Versiune server: 10.1.37-MariaDB
 -- Versiune PHP: 7.3.0
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `activities` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `project_id` bigint(20) UNSIGNED NOT NULL,
   `subject_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
@@ -43,12 +44,11 @@ CREATE TABLE `activities` (
 -- Eliminarea datelor din tabel `activities`
 --
 
-INSERT INTO `activities` (`id`, `project_id`, `subject_type`, `subject_id`, `description`, `changes`, `created_at`, `updated_at`) VALUES
-(1, 10, NULL, NULL, 'created', '{\"before\":[],\"after\":{\"title\":\"Another new project\",\"description\":\"This is some random text\",\"owner_id\":1,\"updated_at\":\"2019-03-26 18:40:07\",\"created_at\":\"2019-03-26 18:40:07\",\"id\":10}}', '2019-03-26 16:40:07', '2019-03-26 16:40:07'),
-(2, 10, NULL, NULL, 'updated', '{\"before\":{\"title\":\"Another new project\"},\"after\":{\"title\":\"Another new project - update\",\"updated_at\":\"2019-03-26 18:44:45\"}}', '2019-03-26 16:44:45', '2019-03-26 16:44:45'),
-(3, 11, NULL, NULL, 'created', NULL, '2019-03-26 16:56:31', '2019-03-26 16:56:31'),
-(4, 11, NULL, NULL, 'updated', '{\"before\":{\"description\":\"Random blabber.\"},\"after\":{\"description\":\"Random blabber. And etc\",\"updated_at\":\"2019-03-26 18:57:01\"}}', '2019-03-26 16:57:01', '2019-03-26 16:57:01'),
-(5, 11, NULL, NULL, 'updated', '{\"before\":{\"title\":\"A new project has been create\"},\"after\":{\"title\":\"A new project has been create - change 2\"}}', '2019-03-26 16:58:57', '2019-03-26 16:58:57');
+INSERT INTO `activities` (`id`, `user_id`, `project_id`, `subject_type`, `subject_id`, `description`, `changes`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL, 'created_project', NULL, '2019-03-28 17:15:10', '2019-03-28 17:15:10'),
+(2, 1, 1, NULL, NULL, 'updated_project', '{\"before\":{\"notes\":null},\"after\":{\"notes\":\"Added some notes.\"}}', '2019-03-28 17:15:23', '2019-03-28 17:15:23'),
+(3, 1, 1, 'App\\Task', 1, 'created_task', NULL, '2019-03-28 17:15:43', '2019-03-28 17:15:43'),
+(4, 1, 1, 'App\\Task', 1, 'completed_task', '{\"before\":[],\"after\":{\"completed\":true}}', '2019-03-28 17:21:07', '2019-03-28 17:21:07');
 
 -- --------------------------------------------------------
 
@@ -67,11 +67,11 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_03_06_123253_create_projects_table', 1),
-(4, '2019_03_09_071048_create_tasks_table', 1),
-(9, '2019_03_22_164015_create_activities_table', 2);
+(10, '2014_10_12_000000_create_users_table', 1),
+(11, '2014_10_12_100000_create_password_resets_table', 1),
+(12, '2019_03_06_123253_create_projects_table', 1),
+(13, '2019_03_09_071048_create_tasks_table', 1),
+(14, '2019_03_22_164015_create_activities_table', 1);
 
 -- --------------------------------------------------------
 
@@ -106,17 +106,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `owner_id`, `title`, `description`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Give it a shot', 'Test 123', 'Test123\r\nanother test\r\n456\r\n111', '2019-03-12 18:07:52', '2019-03-26 03:28:49'),
-(2, 1, 'Give it a shot', 'Test. Changed.', NULL, '2019-03-19 16:43:45', '2019-03-19 16:43:54'),
-(3, 2, 'Provident nostrum et dolores dolor eos ab.', 'Nihil vero sed fugit nobis ipsam explicabo.', NULL, '2019-03-22 15:24:30', '2019-03-22 15:24:30'),
-(4, 3, 'Doloremque sapiente sed repellat aut.', 'Accusantium aperiam accusamus quia molestiae.', NULL, '2019-03-22 15:32:41', '2019-03-22 15:32:41'),
-(5, 4, 'changed', 'Dignissimos et aut error eveniet non excepturi est.', NULL, '2019-03-22 15:37:51', '2019-03-22 15:39:04'),
-(6, 5, 'changed', 'Repellendus minus ratione ea ut provident non.', NULL, '2019-03-22 15:43:58', '2019-03-22 15:45:26'),
-(7, 6, 'changed', 'Quo praesentium voluptatum est saepe sed magnam sed.', NULL, '2019-03-22 17:37:05', '2019-03-22 17:39:43'),
-(8, 1, 'Become a web developer', 'Learning and creating things in order to become a web developer.', NULL, '2019-03-26 14:03:24', '2019-03-26 14:04:03'),
-(9, 1, 'Test project', 'This is a test project', 'Adding some notes', '2019-03-26 14:28:42', '2019-03-26 14:40:48'),
-(10, 1, 'Another new project - update', 'This is some random text', NULL, '2019-03-26 16:40:07', '2019-03-26 16:44:45'),
-(11, 1, 'A new project has been create - change 2', 'Random blabber. And etc', NULL, '2019-03-26 16:56:31', '2019-03-26 16:58:57');
+(1, 1, 'New project', 'This is some random blabber.', 'Added some notes.', '2019-03-28 17:15:10', '2019-03-28 17:21:07');
 
 -- --------------------------------------------------------
 
@@ -138,14 +128,7 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `project_id`, `body`, `completed`, `created_at`, `updated_at`) VALUES
-(1, 1, 'The first task. Updated', 1, '2019-03-12 18:08:02', '2019-03-23 08:27:57'),
-(2, 1, 'The second task', 0, '2019-03-19 16:37:32', '2019-03-23 08:28:19'),
-(3, 7, 'do something', 1, '2019-03-22 17:38:39', '2019-03-22 17:39:43'),
-(4, 1, 'The third task', 0, '2019-03-23 08:28:05', '2019-03-23 08:28:05'),
-(5, 1, 'Last new task 3', 0, '2019-03-23 09:03:50', '2019-03-26 03:28:40'),
-(6, 8, 'Take online courses', 1, '2019-03-26 14:03:46', '2019-03-26 14:04:03'),
-(7, 8, 'Finish Laracasts videos', 0, '2019-03-26 14:03:55', '2019-03-26 14:03:55'),
-(8, 9, 'A new task has arrived', 1, '2019-03-26 14:28:51', '2019-03-26 14:39:53');
+(1, 1, 'New task', 1, '2019-03-28 17:15:43', '2019-03-28 17:21:07');
 
 -- --------------------------------------------------------
 
@@ -169,12 +152,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Viorel', 'viorel.robu@schweighofer.ro', NULL, '$2y$10$3g0K0W6aCLyRMB5t.09NQOIrPGFYn2513hBFCtCOdDoE61tSbRiuK', NULL, '2019-03-12 18:07:08', '2019-03-12 18:07:08'),
-(2, 'Prof. Soledad Stroman III', 'nicolas.niko@example.com', '2019-03-22 15:24:30', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dj6LHoEl2C', '2019-03-22 15:24:30', '2019-03-22 15:24:30'),
-(3, 'Prof. Kieran Mohr DDS', 'zola14@example.net', '2019-03-22 15:32:41', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xdsOtFBVG9', '2019-03-22 15:32:41', '2019-03-22 15:32:41'),
-(4, 'Prof. Vesta Lind', 'virginie83@example.net', '2019-03-22 15:37:51', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '3KAUQuSRJo', '2019-03-22 15:37:51', '2019-03-22 15:37:51'),
-(5, 'Hilton Jaskolski Jr.', 'romaguera.edwardo@example.com', '2019-03-22 15:43:58', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9XtzNutQeO', '2019-03-22 15:43:58', '2019-03-22 15:43:58'),
-(6, 'Garfield Abbott', 'borer.creola@example.net', '2019-03-22 17:37:05', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'TlZBl3uGFl', '2019-03-22 17:37:05', '2019-03-22 17:37:05');
+(1, 'Viorel', 'viorel.robu@schweighofer.ro', NULL, '$2y$10$3XJ42rLYsDZ7XCt1fRagO.z59uZM5sOR3Q2jxGUdGdgf.Cj8L7f6m', NULL, '2019-03-28 17:13:12', '2019-03-28 17:13:12');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -186,6 +164,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 ALTER TABLE `activities`
   ADD PRIMARY KEY (`id`),
   ADD KEY `activities_subject_type_subject_id_index` (`subject_type`,`subject_id`),
+  ADD KEY `activities_user_id_foreign` (`user_id`),
   ADD KEY `activities_project_id_foreign` (`project_id`);
 
 --
@@ -228,31 +207,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pentru tabele `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pentru tabele `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pentru tabele `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pentru tabele `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constrângeri pentru tabele eliminate
@@ -262,7 +241,8 @@ ALTER TABLE `users`
 -- Constrângeri pentru tabele `activities`
 --
 ALTER TABLE `activities`
-  ADD CONSTRAINT `activities_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `activities_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `activities_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constrângeri pentru tabele `projects`
