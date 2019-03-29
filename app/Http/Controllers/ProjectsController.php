@@ -71,6 +71,18 @@ class ProjectsController extends Controller
         $project->update($this->validateRequest());
         return redirect($project->path());
     }
+
+    /**
+     * Delete the selected database entry.
+     */
+    public function destroy(Project $project)
+    {
+        $this->authorize('update', $project);
+
+        $project->delete();
+
+        return redirect('/projects');
+    }
     /**
      * Validate the request attributes.
      *
