@@ -15,7 +15,7 @@ class ProjectPolicy
         return $user->is($project->owner) || $project->members->contains($user);
     }
 
-    public function invite(User $user, Project $project)
+    public function manage(User $user, Project $project)
     {
         return $user->is($project->owner);
     }
