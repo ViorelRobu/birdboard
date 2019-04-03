@@ -632,7 +632,7 @@ table {
 }
 
 .bg-header {
-  background-color: var(-header-background-color);
+  background-color: var(--header-background-color);
 }
 
 .hover\:bg-page:hover {
@@ -648,7 +648,7 @@ table {
 }
 
 .hover\:bg-header:hover {
-  background-color: var(-header-background-color);
+  background-color: var(--header-background-color);
 }
 
 .focus\:bg-page:focus {
@@ -664,7 +664,7 @@ table {
 }
 
 .focus\:bg-header:focus {
-  background-color: var(-header-background-color);
+  background-color: var(--header-background-color);
 }
 
 .bg-bottom {
@@ -5395,7 +5395,7 @@ table {
   --page-background-color: #f5f6f9;
   --card-background-color: white;
   --button-background-color: #47cdff;
-  --header-background-color: #fff;
+  --header-background-color: white;
   --text-default-color: #222;
 }
 
@@ -5444,7 +5444,7 @@ table {
   }
 
   .sm\:bg-header {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .sm\:hover\:bg-page:hover {
@@ -5460,7 +5460,7 @@ table {
   }
 
   .sm\:hover\:bg-header:hover {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .sm\:focus\:bg-page:focus {
@@ -5476,7 +5476,7 @@ table {
   }
 
   .sm\:focus\:bg-header:focus {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .sm\:bg-bottom {
@@ -10202,7 +10202,7 @@ table {
   }
 
   .md\:bg-header {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .md\:hover\:bg-page:hover {
@@ -10218,7 +10218,7 @@ table {
   }
 
   .md\:hover\:bg-header:hover {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .md\:focus\:bg-page:focus {
@@ -10234,7 +10234,7 @@ table {
   }
 
   .md\:focus\:bg-header:focus {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .md\:bg-bottom {
@@ -14960,7 +14960,7 @@ table {
   }
 
   .lg\:bg-header {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .lg\:hover\:bg-page:hover {
@@ -14976,7 +14976,7 @@ table {
   }
 
   .lg\:hover\:bg-header:hover {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .lg\:focus\:bg-page:focus {
@@ -14992,7 +14992,7 @@ table {
   }
 
   .lg\:focus\:bg-header:focus {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .lg\:bg-bottom {
@@ -19718,7 +19718,7 @@ table {
   }
 
   .xl\:bg-header {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .xl\:hover\:bg-page:hover {
@@ -19734,7 +19734,7 @@ table {
   }
 
   .xl\:hover\:bg-header:hover {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .xl\:focus\:bg-page:focus {
@@ -19750,7 +19750,7 @@ table {
   }
 
   .xl\:focus\:bg-header:focus {
-    background-color: var(-header-background-color);
+    background-color: var(--header-background-color);
   }
 
   .xl\:bg-bottom {
