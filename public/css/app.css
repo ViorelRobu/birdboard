@@ -579,6 +579,13 @@ table {
   box-shadow: 0 2px 7px #b0eaff;
 }
 
+.button.is-outlined {
+  background-color: var(--card-background-color);
+  border-width: 2px;
+  border-color: #47cdff;
+  color: #47cdff;
+}
+
 .card {
   background-color: var(--card-background-color);
   padding: 1.25rem;

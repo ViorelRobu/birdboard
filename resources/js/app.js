@@ -9,6 +9,21 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VModal from 'vue-js-modal'
+
+Vue.use(VModal)
+
+/*
+By default, the plugin will use "modal" name for the component.
+If you need to change it, you can do so by providing "componentName" param.
+
+Example:
+
+Vue.use(VModal, { componentName: "foo-modal" })
+...
+<foo-modal name="bar"></foo-modal>
+*/
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
