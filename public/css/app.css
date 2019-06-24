@@ -514,6 +514,24 @@ table {
   border-collapse: collapse;
 }
 
+.dropdown-toggle > button:focus {
+  outline: 0;
+}
+
+.dropdown-menu-link {
+  display: block;
+  color: var(--text-default-color);
+  text-decoration: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: .875rem;
+  line-height: 2;
+}
+
+.dropdown-menu-link:hover {
+  background: rgba(0, 0, 0, .1);
+}
+
 /**
  * This injects any component classes registered by plugins.
  *

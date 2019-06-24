@@ -51,31 +51,26 @@
                                 @endif
                             @else
                                 <theme-switcher></theme-switcher>
-                                <a
-                                    class="flex items-center text-default no-underline text-sm"
-                                    href="#" role="button"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    v-pre
-                                >
-                                    <img width="35 mr-3"
-                                        class="rounded-full mr-3"
-                                        src="{{ gravatar_url(Auth::user()->email) }}">
-                                    <span class="caret mr-3">{{ Auth::user()->name }} </span>
-                                </a>
-
-                                <div class="flex dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <dropdown width="100%">
+                                    <template v-slot:trigger>
+                                        <button
+                                            class="flex items-center text-default no-underline text-sm"
+                                        >
+                                            <img width="35 mr-3"
+                                                class="rounded-full mr-3"
+                                                src="{{ gravatar_url(Auth::user()->email) }}">
+                                            <span class="caret mr-3">
+                                                {{ Auth::user()->name }}
+                                            </span>
+                                        </button>
+                                    </template>
+                                    <template v-slot:default>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        <a href="#" class="dropdown-menu-link" onclick="javascript: document.querySelector('#logout-form').submit()">Logout</a>
+                                        </template>
+                                </dropdown>
                             @endguest
                         </div>
                     </div>

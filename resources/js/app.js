@@ -9,9 +9,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import VModal from 'vue-js-modal'
+import VModal from 'vue-js-modal';
 
-Vue.use(VModal)
+Vue.use(VModal);
 
 /*
 By default, the plugin will use "modal" name for the component.
@@ -37,6 +37,7 @@ Vue.use(VModal, { componentName: "foo-modal" })
 
 Vue.component('theme-switcher', require('./components/ThemeSwitcher.vue').default);
 Vue.component('new-project-modal', require('./components/NewProjectModal.vue').default);
+Vue.component('dropdown', require('./components/Dropdown.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
